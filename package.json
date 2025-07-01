@@ -9,6 +9,8 @@
     "fertool": "./index.ts"
   },
   "scripts": {
+    "test1": "bun run index.ts -i ./.test/pictures1 -o ./.test/results1.csv -m ./.test/best68.onnx",
+    "test2": "bun run index.ts -i ./.test/pictures2 -o ./.test/results2.csv -m ./.test/best68.onnx",
     "start": "bun run index.ts",
     "dev": "bun run --watch index.ts",
     "build": "bun build index.ts --outdir ./dist --target bun",
