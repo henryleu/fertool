@@ -1,0 +1,27 @@
+🔍 ONNX Model Shape Tester
+==================================================
+Testing model: /Users/henryleu/dev/codebase/zhihang/fertool/.model/yolo.onnx
+==================================================
+✓ Model validation passed
+
+📥 INPUT INFORMATION:
+------------------------------
+Input 1: images
+  Shape: [1, 3, 320, 320]
+  Data type: FLOAT
+
+📤 OUTPUT INFORMATION:
+------------------------------
+Output 1: output0
+  Shape: [1, 10, 2100]
+  Data type: FLOAT
+
+📋 MODEL INFORMATION:
+------------------------------
+Model version: 0
+IR version: 9
+Producer name: pytorch
+Producer version: 2.7.0
+Number of nodes: 428
+
+✅ Model shape testing completed successfully!

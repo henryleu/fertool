@@ -49,6 +49,7 @@ report.[0-9]_.[0-9]_.[0-9]_.[0-9]_.json
 .test
 
 # Test model folder
-model
 .csv
 .onnx
+venv
+__pycache__
