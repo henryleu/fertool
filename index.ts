@@ -6,33 +6,47 @@ import { existsSync } from 'fs';
 
 const program = new Command();
 
+function getDefaultModelPath(): string {
+  return process.env.FER_MODEL || resolve(process.cwd(), 'model.onnx');
+}
+
 program
   .name('fertool')
   .description('Facial Expression Recognition CLI Tool')
   .version('1.0.0')
   .option('-i, --input <folder>', 'input folder path where picture files are located (.jpg, .jpeg, .png, .bmp)', process.cwd())
   .option('-o, --output <file>', 'output filename for recognized results as CSV format', resolve(process.cwd(), 'results.csv'))
+  .option('-m, --model <file>', 'model file path for facial expression recognition model in ONNX format')
   .action(async (options) => {
     console.log('Facial Expression Recognition Tool');
     console.log('Input folder:', options.input);
     console.log('Output file:', options.output);
+    
+    const modelPath = options.model || getDefaultModelPath();
+    console.log('Model file:', modelPath);
     
     if (!existsSync(options.input)) {
       console.error(`Error: Input folder "${options.input}" does not exist.`);
       process.exit(1);
     }
 
+    if (!existsSync(modelPath)) {
+      console.error(`Error: Model file "${modelPath}" does not exist.`);
+      process.exit(1);
+    }
+
     try {
-      await processImages(options.input, options.output);
+      await processImages(options.input, options.output, modelPath);
     } catch (error) {
       console.error('Error processing images:', error);
       process.exit(1);
     }
   });
 
-async function processImages(inputFolder: string, outputFile: string) {
+async function processImages(inputFolder: string, outputFile: string, modelPath: string) {
   console.log(`Processing images from: ${inputFolder}`);
   console.log(`Results will be saved to: ${outputFile}`);
+  console.log(`Using model: ${modelPath}`);
   
   // TODO: Implement facial expression recognition logic
   // - Scan folder for supported image files (.jpg, .jpeg, .png, .bmp)
